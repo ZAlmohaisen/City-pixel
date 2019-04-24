@@ -34,6 +34,8 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
     var imageUrlArray = [String]()
     var imageArray = [UIImage]()
     
+    var idArray = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
@@ -204,12 +206,6 @@ extension MapVC: MKMapViewDelegate {
     }
     
     
-//    func retriveId(forAnnotation annotation: DroppablePin, handler: @escaping (_ status: Bool) -> ()) {
-//        
-//        Alamofire.request(<#T##url: URLConvertible##URLConvertible#>)
-//        
-//    }
-//    
     func retriveImages(handler: @escaping (_ status: Bool) -> ()) {
         
         for url in imageUrlArray {
@@ -224,6 +220,17 @@ extension MapVC: MKMapViewDelegate {
             })
         }
     }
+    
+//    func retriveId(handler: @escaping (_ status: Bool) -> ()) {
+//        
+//        for idd in idArray {
+//            Alamofire.request(idd).responseJSON { (response) in
+//                guard let idd = response.result.value else {return}
+//                let iid = idd["id"] as! Dictionary<String, AnyObject>
+//                self.idArray.append(idd as! String)
+//            }
+//        }
+//    }
     
     func cancelAllSessions() {
         Alamofire.SessionManager.default.session.getTasksWithCompletionHandler { (sessionDatatask, uploadData, downloadData) in

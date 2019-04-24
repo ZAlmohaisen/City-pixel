@@ -17,9 +17,12 @@ class PopVC: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var idlbl: UILabel!
     
     var passedimage: UIImage!
+    var passedLbl: UILabel!
     
     func initData(forImage image: UIImage) {
         self.passedimage = image
+//        self.passedLbl = label
+        
         
     }
     
@@ -27,13 +30,39 @@ class PopVC: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         popImageView.image = passedimage
-        addDoubleTap()
+       swipe()
+        
+        
 
         
     }
     
+    func swipe() {
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(handler(sender:)))
+        swipe.direction = .down
+        view.addGestureRecognizer(swipe)
+    }
+    
+    @objc func handler(sender: UISwipeGestureRecognizer) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+//    func swipe() {
+//        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(ss))
+//        swipe.direction = .down
+//        popImageView.addGestureRecognizer(swipe)
+//    }
+//
+//    @objc func ss() {
+//        UIView.animate(withDuration: 0.3) {
+//            self.view.layoutIfNeeded()
+//
+//        }
+//    }
+    
 
     func addDoubleTap() {
+        
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(screenWasDoubleTapped))
         doubleTap.numberOfTapsRequired = 2
         doubleTap.delegate = self
